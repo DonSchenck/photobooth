@@ -1,0 +1,98 @@
+﻿@page "/"
+@inject IJSRuntime JSRuntime
+@inject HttpClient HttpClient
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+<h1>Blazor Webcam</h1>
+<video id="videoFeed" width="320" height="240" />
+<canvas class="d-none" id="currentFrame" width="320" height="240" />
+<br />
+<button class="btn btn-primary mb-3" @onclick="CaptureFrame">Capture Frame</button>
+<br />
+
+@if (!string.IsNullOrEmpty(frameUri))
+{
+    <img src="@frameUri" />
+}
+
+@code {
+
+    private string frameUri="";
+    public class Photo
+    {
+        public string imageData{ get; set; }
+        public string imageType{get;set;}
+        public string greeting{ get; set; }
+        public string dateFormatString{ get; set; }
+        public string language{ get; set; }
+        public string location{ get; set; }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await JSRuntime.InvokeVoidAsync("startVideo", "videoFeed");
+    }
+    private async Task CaptureFrame()
+    {
+        //await JSRuntime.InvokeAsync<String>("getFrame", "videoFeed", "currentFrame");
+        await JSRuntime.InvokeAsync<String>("getFrame", "videoFeed", "currentFrame", DotNetObjectReference.Create(this));
+    }
+
+    [JSInvokable]
+    public async void ProcessImage(string imageString)
+    {
+
+        //byte[] imageData = Convert.FromBase64String(imageString);
+        byte[] imageData = Convert.FromBase64String(imageString.Split(',')[1]);
+        Photo photo = new Photo();
+        photo.imageData = imageData.ToString();
+        photo.imageType = "jpg";
+        photo.greeting = "OpenShift Serverless";
+        photo.dateFormatString = "MMMM d, yyyy";
+        photo.language = "en";
+        photo.location = "US";
+        var postBody = System.Text.Json.JsonSerializer.Serialize(photo);
+
+        var response = await HttpClient.PostAsJsonAsync("https://imageoverlay-rhn-engineering-dschenck-dev.apps.sandbox.x8i5.p1.openshiftapps.com/overlayimage", postBody);
+        //var response = await HttpClient.PostAsJsonAsync("https://knative-proxy-rhn-engineering-dschenck-dev.apps.sandbox.x8i5.p1.openshiftapps.com/overlayimage", postBody);
+
+        // convert response data to Article object
+        photo = await response.Content.ReadFromJsonAsync<Photo>();
+        // Convert base 64 string to byte[]
+        // Convert base 64 string to byte[]
+        byte[] imageBytes = Convert.FromBase64String(photo.imageData);
+        // Convert byte[] to Image
+        using (var ms = new MemoryStream(imageBytes, 0, imageBytes.Length))
+        {
+            System.Drawing.Image image = System.Drawing.Image.FromStream(ms, true);
+            frameUri = photo.imageData;
+        }
+        //Do image processing here
+/*                nodefetch(url, {
+          timeout: 10001,
+          method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          imageData: base64result,
+          imageType: 'jpg',
+          greeting: (process.env.REACT_APP_OVERLAY_MESSAGE || "OpenShift Serverless!"),
+          dateFormatString: 'MMMM d, yyyy',
+          language: 'en',
+          location: 'US'
+        }),
+        */
+        // End image processing
+        frameUri = imageString;
+    }
+
+}
