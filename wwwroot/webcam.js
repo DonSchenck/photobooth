@@ -20,7 +20,7 @@
 function getFrame(src, dest, dotNetHelper) {
     let video = document.getElementById(src);
     let canvas = document.getElementById(dest);
-    canvas.getContext('2d').drawImage(video, 0, 0, 320, 240);
+    canvas.getContext('2d').drawImage(video, 0, 0, 640, 480);
 
     let dataUrl = canvas.toDataURL("image/jpeg");
     dotNetHelper.invokeMethodAsync('ProcessImage', dataUrl);
