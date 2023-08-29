@@ -1,2 +1,2 @@
-# photobooth
-Blazor WASM photobooth app
+# picturethis
+Blazor WASM picturethis app

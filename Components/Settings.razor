@@ -1,7 +1,7 @@
 ﻿<div class="settings-card">
     <div class="card" style="width: 640;">
         <div class="card-body">
-            <input type="text" @bind="@serviceUrl" @oninput="OnInputEvent" />
+            <input type="text" @bind="@serviceUrl" @oninput="OnInputEvent">http://localhost:8080/overlayImage</input>
             <button class="btn btn-primary" @onclick="@(() => OnClick.InvokeAsync(serviceUrl))">Save</button>
         </div>
     </div>

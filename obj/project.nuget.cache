@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "M+cACUxUyAAWbJq+6sMiDaN5euf+6O4cSgjUJ+w/o90g/3uiuUAUyJ3iQnsc2RaXQi6YdV3SC4qyu5MNAZRwaQ==",
+  "dgSpecHash": "w+XIDhPzRw7TwNFfHdgZBdSUzRjvQBcyKP/3Wlec3w5IN1/JO5t/Q6Cn8UbeIIBuieJf3gQAbeKc7uIBBq0AsQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dschenck\\src\\github\\donschenck\\photobooth\\photobooth.csproj",
+  "projectFilePath": "C:\\Users\\dschenck\\src\\github\\donschenck\\picturethis\\picturethis.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dschenck\\.nuget\\packages\\microsoft.aspnetcore.authorization\\6.0.13\\microsoft.aspnetcore.authorization.6.0.13.nupkg.sha512",
     "C:\\Users\\dschenck\\.nuget\\packages\\microsoft.aspnetcore.components\\6.0.13\\microsoft.aspnetcore.components.6.0.13.nupkg.sha512",
@@ -35,7 +35,7 @@
     "C:\\Users\\dschenck\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\dschenck\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
     "C:\\Users\\dschenck\\.nuget\\packages\\system.text.json\\6.0.0\\system.text.json.6.0.0.nupkg.sha512",
-    "C:\\Users\\dschenck\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\6.0.11\\microsoft.netcore.app.runtime.mono.browser-wasm.6.0.11.nupkg.sha512"
+    "C:\\Users\\dschenck\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\6.0.21\\microsoft.netcore.app.runtime.mono.browser-wasm.6.0.21.nupkg.sha512"
   ],
   "logs": []
 }
